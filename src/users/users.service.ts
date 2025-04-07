@@ -7,7 +7,6 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model, Types } from "mongoose";
 import { User, UserDocument } from "./schemas/user.schema";
 import { CreateUserDto } from "./dto/create-user.dto";
-import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class UsersService {
@@ -75,5 +74,17 @@ export class UsersService {
       throw new NotFoundException("사용자를 찾을 수 없습니다.");
     }
     return user.favorites;
+  }
+
+  async findById(id: string): Promise<User> {
+    try {
+      const user = await this.userModel.findById(id).exec();
+      if (!user) {
+        throw new NotFoundException("사용자를 찾을 수 없습니다.");
+      }
+      return user;
+    } catch (error) {
+      throw new NotFoundException("사용자를 찾을 수 없습니다.");
+    }
   }
 }

@@ -22,3 +22,10 @@ yarn-error.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Documents
+*.xlsx
+*.xls
+*.doc
+*.docx
+*.pdf

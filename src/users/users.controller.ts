@@ -20,19 +20,15 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get("me/favorites")
+  @UseGuards(JwtAuthGuard)
   async getFavorites(@Request() req) {
-    console.log("User from request:", req.user);
     return this.usersService.getFavorites(req.user.userId);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Post("me/favorites/:listingId")
+  @UseGuards(JwtAuthGuard)
   async addToFavorites(@Request() req, @Param("listingId") listingId: string) {
-    console.log("User from request:", req.user);
-    console.log("User ID:", req.user.userId);
-    console.log("Listing ID:", listingId);
     return this.usersService.addToFavorites(req.user.userId, listingId);
   }
 
